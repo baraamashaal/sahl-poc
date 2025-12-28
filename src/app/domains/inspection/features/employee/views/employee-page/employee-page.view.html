@@ -1,0 +1,54 @@
+<div class="inspection-employee-page">
+  <header class="page-header">
+    <div class="page-header__content">
+      <h1 class="page-title">Inspection Employees</h1>
+      <p class="page-subtitle">Manage and inspect employee records</p>
+    </div>
+  </header>
+
+  @if (error(); as errorMsg) {
+    <div class="error-banner">
+      <div class="error-banner__content">
+        <p class="error-banner__message">{{ errorMsg }}</p>
+        <button
+          class="error-banner__action"
+          (click)="onRetry()"
+          type="button">
+          Retry
+        </button>
+      </div>
+    </div>
+  }
+
+  <div class="page-content">
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Search employees..."
+        (input)="onSearchChange($event)"
+        class="search-input"
+      />
+    </div>
+
+    @if (loading()) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading employees...</p>
+      </div>
+    } @else {
+      <div class="employee-grid">
+        @for (employee of employees(); track employee.id) {
+          <ins-employee-inspector
+            [employee]="employee"
+            (inspectClicked)="onInspectEmployee($event)"
+            (editClicked)="onEditEmployee($event)"
+          />
+        } @empty {
+          <div class="empty-state">
+            <p>No employees found</p>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

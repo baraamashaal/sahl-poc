@@ -1,0 +1,31 @@
+<div class="tawjeeh-employee-page">
+  <header class="page-header">
+    <div class="page-header__content">
+      <h1 class="page-title">Tawjeeh - Employee Management</h1>
+      <p class="page-subtitle">
+        Showing {{ filteredCount() }} of {{ totalCount() }} employees
+      </p>
+    </div>
+  </header>
+
+  @if (error()) {
+    <div class="error-banner">
+      <div class="error-banner__content">
+        <p class="error-banner__message">{{ error() }}</p>
+        <button type="button" class="error-banner__action" (click)="retryLoad()">
+          Retry
+        </button>
+      </div>
+    </div>
+  }
+
+  <main class="page-content">
+    <twj-employee-list
+      [employees]="employees()"
+      [loading]="loading()"
+      [showDetails]="false"
+      (employeeSelected)="onEmployeeSelected($event)"
+      (employeeAction)="onEmployeeAction($event)"
+    />
+  </main>
+</div>

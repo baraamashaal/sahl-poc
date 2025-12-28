@@ -1,0 +1,54 @@
+.employee-list {
+  width: 100%;
+}
+
+.employee-list__loading,
+.employee-list__empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  color: #666;
+  font-size: 16px;
+}
+
+.employee-list__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.employee-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.btn-action {
+  flex: 1;
+  padding: 8px 16px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: #1565c0;
+  }
+
+  &:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .employee-list__grid {
+    grid-template-columns: 1fr;
+  }
+}

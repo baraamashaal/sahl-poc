@@ -1,0 +1,27 @@
+<div class="employee-list">
+  @if (loading()) {
+    <div class="employee-list__loading">
+      <p>Loading employees...</p>
+    </div>
+  } @else {
+    @if (employees().length === 0) {
+      <div class="employee-list__empty">
+        <p>No employees found</p>
+      </div>
+    } @else {
+      <div class="employee-list__grid">
+        @for (employee of employees(); track trackByEmployeeId($index, employee)) {
+          <mhr-employee-card
+            [employee]="employee"
+            [showDetails]="showDetails()"
+            (selected)="onEmployeeSelected($event)"
+            (actionClicked)="onEmployeeAction($event)">
+            <div slot="actions" class="employee-actions">
+              <button type="button" class="btn-action">Tawjeeh Details</button>
+            </div>
+          </mhr-employee-card>
+        }
+      </div>
+    }
+  }
+</div>

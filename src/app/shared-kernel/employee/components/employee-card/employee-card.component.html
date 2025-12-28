@@ -1,0 +1,52 @@
+<div
+  class="employee-card"
+  [class.disabled]="disabled()"
+  [class.detailed]="showDetails()"
+  (click)="onCardClick()">
+
+  <div class="employee-card__header">
+    <div class="employee-card__avatar">
+      {{ employee().firstName.charAt(0) }}{{ employee().lastName.charAt(0) }}
+    </div>
+
+    <div class="employee-card__info">
+      <h3 class="employee-card__name">{{ fullName }}</h3>
+      <p class="employee-card__number">{{ employee().employeeNumber }}</p>
+    </div>
+
+    <span
+      class="employee-card__status"
+      [class.status-active]="employee().status === 'active'"
+      [class.status-inactive]="employee().status === 'inactive'"
+      [class.status-on-leave]="employee().status === 'on_leave'"
+      [class.status-suspended]="employee().status === 'suspended'">
+      {{ employee().status }}
+    </span>
+  </div>
+
+  @if (showDetails()) {
+    <div class="employee-card__details">
+      <div class="employee-card__detail">
+        <span class="label">Email:</span>
+        <span class="value">{{ employee().email }}</span>
+      </div>
+      <div class="employee-card__detail">
+        <span class="label">Phone:</span>
+        <span class="value">{{ employee().phoneNumber }}</span>
+      </div>
+      <div class="employee-card__detail">
+        <span class="label">Department:</span>
+        <span class="value">{{ employee().department }}</span>
+      </div>
+      <div class="employee-card__detail">
+        <span class="label">Position:</span>
+        <span class="value">{{ employee().position }}</span>
+      </div>
+    </div>
+  }
+
+  <div class="employee-card__footer">
+    <!-- Slot for domain-specific content -->
+    <ng-content select="[slot=actions]" />
+  </div>
+</div>
